@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Overzicht";
+}
+
+<h1>Bevestiging reservaties
+    <img src="~/Content/images/logo_bevestigen.png" alt="reserveren" />
+</h1>
+<nav>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home")">Voorstellingen</a></li>
+    </ul>
+</nav>
+<br />
+<br />
+<br />
+<h2>Gelukte reserveringen</h2>
+<table class="zebra">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>Uitvoerders</th>
+            <th>Prijs</th>
+            <th>Plaatsen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MVC4_Cultuurhuis.Models.MandjeItem item in ViewBag.gelukt)
+	    {
+		    <tr>
+                <td>@Html.DisplayFor(m => item.Datum)</td>
+                <td>@item.Titel</td>
+                <td>@item.Uitvoerders</td>
+                <td>@Html.DisplayFor(m => item.Prijs)</td>
+                <td class="rechts">@item.Plaatsen</td>
+            </tr>
+	    }
+    </tbody>
+</table>
+<h2>Mislukte reserveringen</h2>
+<table class="zebra">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>Uitvoerders</th>
+            <th>Prijs</th>
+            <th>Plaatsen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MVC4_Cultuurhuis.Models.MandjeItem item in ViewBag.mislukt)
+	    {
+		    <tr>
+                <td>@Html.DisplayFor(m => item.Datum)</td>
+                <td>@item.Titel</td>
+                <td>@item.Uitvoerders</td>
+                <td>@Html.DisplayFor(m => item.Prijs)</td>
+                <td class="rechts">@item.Plaatsen</td>
+            </tr>
+	    }
+    </tbody>
+</table>

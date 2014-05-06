@@ -1,0 +1,80 @@
+﻿@model MVC4_Cultuurhuis.Models.VoorstellingenInfo
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Voorstellingen van het Cultuurhuis
+    <img src="~/Content/images/logo_voorstellingen.png" alt="voorstellingen" />
+</h1>
+@if (ViewBag.mandjeTonen)
+	{
+		<nav>
+            <ul>
+                <li><a href="@Url.Action("Mandje", "Home")">Reservatiemandje</a></li>
+                <li><a href="@Url.Action("Bevestiging", "Home")">Bevestiging reservatie</a></li>
+            </ul>
+        </nav> 
+	}
+    <br />
+    <br />
+    <br />    
+<h2>Genres</h2>
+<nav>
+    <ul>
+        @foreach (var genre in Model.Genres)
+	    {
+            var url = Url.Action("Index", "Home", new { id = genre.GenreNr });
+            <li><a href="@url">@genre.GenreNaam</a></li>
+	    }
+    </ul>
+</nav>
+@if (Model.Genre != null)
+	{
+		<br />
+        <br />
+        <br /> 
+        <h2>@Model.Genre.GenreNaam voorstellingen</h2>
+        if (Model.Voorstellingen.Count() > 0)
+        {
+            <table class="zebra">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Titel</th>
+                        <th>Uitvoerders</th>
+                        <th>Prijs</th>
+                        <th>Vrije plaatsen</th>
+                        <th>Reserveren</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var voorstelling in Model.Voorstellingen)
+	                {
+		                <tr>
+                            <td>@Html.DisplayFor(m => voorstelling.Datum)</td>
+                            <td>@voorstelling.Titel</td>
+                            <td>@voorstelling.Uitvoerders</td>
+                            <td>@Html.DisplayFor(m => voorstelling.Prijs)</td>
+                            <td class="rechts">@voorstelling.VrijePlaatsen</td>
+                            @if (voorstelling.VrijePlaatsen > 0)
+	                        {
+                                var urlReserveren = Url.Action("Reserveren", "Home", new { id = voorstelling.VoorstellingsNr });
+                                <td><a href="@urlReserveren">Reserveren</a></td>
+	                        }
+                            else
+                            {
+                                <td></td>
+                            }
+                        </tr>
+	                }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Er zijn geen voorstellingen van dit genre beschikbaar.</p>
+        }
+	}
+
+

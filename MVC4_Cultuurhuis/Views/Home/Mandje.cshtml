@@ -1,0 +1,52 @@
+﻿@model List<MVC4_Cultuurhuis.Models.MandjeItem>
+
+@{
+    ViewBag.Title = "Mandje";
+}
+
+<h2>Revervatiemandje
+    <img src="~/Content/images/logo_winkelmand.png" alt="reserveren" />
+</h2>
+<nav>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home")">Voorstellingen</a></li>
+        <li><a href="@Url.Action("Bevestiging", "Home")" >Bevestiging reservatie</a></li>
+    </ul>
+</nav>
+<br />
+<br />
+<br />
+<h2>Inhoud van uw reservatiemandje:</h2>
+<form method="post" action="~/Home/Verwijderen">
+    <table class="zebra">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Titel</th>
+                <th>Uitvoerders</th>
+                <th>Prijs</th>
+                <th>Plaatsen</th>
+                <th>
+                    <input type="submit" value="Verwijderen" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+	        {
+		        <tr>
+                    <td>@Html.DisplayFor(m => item.Datum)</td>
+                    <td>@item.Titel</td>
+                    <td>@item.Uitvoerders</td>
+                    <td>@Html.DisplayFor(m => item.Prijs)</td>
+                    <td class="rechts">@item.Plaatsen</td>
+                    <td class="midden">
+                        <input type="checkbox" name="@item.VoorstellingsNr" />
+                    </td>
+                </tr>
+	        }
+        </tbody>
+    </table>
+</form>
+<br />
+<p>Te betalen: @(String.Format("{0:€ #,##0.00}", ViewBag.teBetalen))</p>

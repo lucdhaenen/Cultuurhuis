@@ -1,0 +1,36 @@
+﻿@model MVC4_Cultuurhuis.Models.Voorstelling
+
+@{
+    ViewBag.Title = "Reserveren";
+}
+
+<h1>Reserveren
+    <img src="~/Content/images/logo_reserveren.png" alt="reserveren" />
+</h1>
+<a href="@Url.Action("Index", "Home")">Voorstellingen</a>
+<form method="post" action="~/Home/Reserveer/@Model.VoorstellingsNr">
+    <dl>
+        <dt>Voorstelling: </dt>
+        <dd>@Model.Titel</dd>
+        <dt>Uitvoerders: </dt>
+        <dd>@Model.Uitvoerders</dd>
+        <dt>Datum: </dt>
+        <dd>@Html.DisplayFor(m => m.Datum)</dd>
+        <dt>Prijs: </dt>
+        <dd>@Html.DisplayFor(m => m.Prijs)</dd>
+        <dt>Vrije plaatsen: </dt>
+        <dd>@Model.VrijePlaatsen</dd>
+        <dt>Plaatsen: </dt>
+        <dd>
+            @{
+                var aantal = 1;
+                if (Session[Model.VoorstellingsNr.ToString()] != null)
+                {
+                    aantal = Convert.ToInt16(Session[Model.VoorstellingsNr.ToString()]);
+                }
+            }
+            <input value="@aantal" required="required" min="1" type="number" max="@Model.VrijePlaatsen" name="aantalPlaatsen" />
+        </dd>
+    </dl>
+    <input value="Reserveren" type="submit" />
+</form>

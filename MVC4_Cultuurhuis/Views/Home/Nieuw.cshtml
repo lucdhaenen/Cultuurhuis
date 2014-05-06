@@ -1,0 +1,45 @@
+﻿@model MVC4_Cultuurhuis.Models.NieuweKlantForm
+
+@{
+    ViewBag.Title = "Nieuw";
+}
+
+<h1>Nieuwe klant
+    <img src="~/Content/images/logo_nieuwe_gebruiker.png" alt="nieuwe klant" />
+</h1>
+<nav>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home")">Voorstellingen</a></li>
+        <li><a href="@Url.Action("Mandje", "Home")">Reservatiemandje</a></li>
+        <li><a href="@Url.Action("Bevestiging", "Home")">Bevestiging reservatie</a></li>
+    </ul>
+</nav>
+<br />
+<br />
+<br />
+@using(Html.BeginForm())
+	{
+		<dl>
+            <dt>@Html.LabelFor(m => m.Voornaam):</dt>
+            <dd>@Html.EditorFor(m => m.Voornaam)</dd>
+            <dt>@Html.LabelFor(m => m.Familienaam):</dt>
+            <dd>@Html.EditorFor(m => m.Familienaam)</dd>
+            <dt>@Html.LabelFor(m => m.Straat):</dt>
+            <dd>@Html.EditorFor(m => m.Straat)</dd>
+            <dt>@Html.LabelFor(m => m.Huisnr):</dt>
+            <dd>@Html.EditorFor(m => m.Huisnr)</dd>
+            <dt>@Html.LabelFor(m => m.Postcode):</dt>
+            <dd>@Html.EditorFor(m => m.Postcode)</dd>
+            <dt>@Html.LabelFor(m => m.Gemeente):</dt>
+            <dd>@Html.EditorFor(m => m.Gemeente)</dd>
+            <dt>@Html.LabelFor(m => m.Gebruikersnaam):</dt>
+            <dd>@Html.EditorFor(m => m.Gebruikersnaam)</dd>
+            <dt>@Html.LabelFor(m => m.Paswoord):</dt>
+            <dd>@Html.EditorFor(m => m.Paswoord)</dd>
+            <dt>@Html.LabelFor(m => m.HerhaalPaswoord):</dt>
+            <dd>@Html.EditorFor(m => m.HerhaalPaswoord)</dd>
+        </dl> 
+        <input name="toevoegen" type="submit" value="OK" />
+        <br />
+        @Html.ValidationSummary("Er zijn validatie fouten:");
+	}
